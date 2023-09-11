@@ -7,8 +7,8 @@ public class GreeterWithMemory implements Greeter {
 
     private final GuestBook guestBook;
 
-    public GreeterWithMemory() {
-        guestBook = new GuestBook();
+    public GreeterWithMemory(GuestBook guestBook) {
+        this.guestBook = guestBook;
     }
 
     @Override

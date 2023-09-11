@@ -16,12 +16,11 @@ class GreeterTest {
     }
 
     @Test
-    void greetGianlucaWithMemory() {
-        final Greeter greeter = new GreeterWithMemory();
+    void greetGianlucaForTheFirstTime() {
+        final GuestBook guestBook = new PropertiesGuestBook();
+        final Greeter greeter = new GreeterWithMemory(guestBook);
 
         final String greeting = greeter.greet("Gianluca");
-
-        System.out.println(greeting);
         assertThat(greeting).contains("Hello Gianluca");
     }
 }
