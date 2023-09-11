@@ -11,6 +11,17 @@ class GreeterTest {
 
         final String greeting = greeter.greet("Gianluca");
 
+        System.out.println(greeting);
+        assertThat(greeting).contains("Hello Gianluca");
+    }
+
+    @Test
+    void greetGianlucaWithMemory() {
+        final Greeter greeter = new GreeterWithMemory();
+
+        final String greeting = greeter.greet("Gianluca");
+
+        System.out.println(greeting);
         assertThat(greeting).contains("Hello Gianluca");
     }
 }
