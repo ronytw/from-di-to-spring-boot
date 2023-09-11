@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!$WAVE_BLUE = "#003D4F"
+!$SAPPHIRE_BLUE = "#47A1AD"
+!$GRAY = "#EDF1F3"
+!$GREEN = "#6B9E78"
+!$YELLOW = "#CC850A"
+!$PURPLE = "#634F7D"
+!$PINK = "#F2617A"
+
+!$LIGHTER_BLUE = "#a1d2d8"
+!$LIGHTER_GREEN = "#b5cfbb"
+
+!$FONT_NAME = "Inter"
+
+skinparam ClassFontName $FONT_NAME
+
+skinparam ArrowColor $PINK
+
+skinparam ClassBorderColor $GREEN
+skinparam ClassBackgroundColor $LIGHTER_GREEN
+
+skinparam stereotypeCBackgroundColor $YELLOW
+skinparam stereotypeIBackgroundColor $PINK
+
+interface Greeter {
+    greet(name: String)
+}
+
+together {
+    class GreeterWithMemory {
+        GuestBook guestbook
+        greet(name: String)
+    }
+
+    class GuestBook {
+        findLatestVisit(String name)
+    }
+}
+
+Greeter <|-- GreeterWithMemory : implements
+GreeterWithMemory --* GuestBook : contains
+
+@enduml

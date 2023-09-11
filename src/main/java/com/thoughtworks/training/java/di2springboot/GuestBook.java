@@ -9,16 +9,23 @@ public class GuestBook {
     private static final String BASE_PATH = Thread.currentThread().getContextClassLoader().getResource("").getPath();
     private static final String DB_PATH = BASE_PATH + "/visits.properties";
 
+    public GuestBook() {
+    }
+
     public Optional<LocalDateTime> findLatestVisit(String name) {
         Properties visitsDatabase = loadDatabase();
 
-        Optional<LocalDateTime> result = getLatestVisit(name, visitsDatabase);
+        Optional<LocalDateTime> result = getLatestVisit(visitsDatabase, name);
 
+        saveVisitInDatabase(visitsDatabase, name);
+
+        return result;
+    }
+
+    private void saveVisitInDatabase(Properties visitsDatabase, String name) {
         visitsDatabase.setProperty(name, LocalDateTime.now().toString());
 
         saveDatabase(visitsDatabase);
-
-        return result;
     }
 
     private void saveDatabase(Properties visitsDatabase) {
@@ -41,7 +48,7 @@ public class GuestBook {
         return visitsDatabase;
     }
 
-    private Optional<LocalDateTime> getLatestVisit(String name, Properties visitsDatabase) {
+    private Optional<LocalDateTime> getLatestVisit(Properties visitsDatabase, String name) {
         String latestVisitString = visitsDatabase.getProperty(name);
         if (latestVisitString == null) {
             return Optional.empty();
