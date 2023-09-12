@@ -9,7 +9,8 @@ public class PropertiesGuestBook implements GuestBook {
     private static final String BASE_PATH = Thread.currentThread().getContextClassLoader().getResource("").getPath();
     private static final String DB_PATH = BASE_PATH + "/visits.properties";
 
-    public PropertiesGuestBook() {
+    public void init() {
+        System.out.println("I'm going to use " + DB_PATH + " for storing data");
     }
 
     @Override
