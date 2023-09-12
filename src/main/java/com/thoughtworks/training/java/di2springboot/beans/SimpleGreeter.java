@@ -1,4 +1,4 @@
-package com.thoughtworks.training.java.di2springboot;
+package com.thoughtworks.training.java.di2springboot.beans;
 
 public class SimpleGreeter implements Greeter {
     @Override

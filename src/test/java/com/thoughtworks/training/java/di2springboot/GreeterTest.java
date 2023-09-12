@@ -1,5 +1,9 @@
 package com.thoughtworks.training.java.di2springboot;
 
+import com.thoughtworks.training.java.di2springboot.beans.Greeter;
+import com.thoughtworks.training.java.di2springboot.beans.GreeterWithMemory;
+import com.thoughtworks.training.java.di2springboot.beans.GuestBook;
+import com.thoughtworks.training.java.di2springboot.beans.SimpleGreeter;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -7,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.DURATION;
 
 class GreeterTest {
     @Test

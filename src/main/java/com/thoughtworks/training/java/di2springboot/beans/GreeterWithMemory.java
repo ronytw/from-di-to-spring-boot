@@ -1,4 +1,6 @@
-package com.thoughtworks.training.java.di2springboot;
+package com.thoughtworks.training.java.di2springboot.beans;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -7,7 +9,7 @@ public class GreeterWithMemory implements Greeter {
 
     private final GuestBook guestBook;
 
-    public GreeterWithMemory(GuestBook guestBook) {
+    public GreeterWithMemory(@Autowired GuestBook guestBook) {
         this.guestBook = guestBook;
     }
 
