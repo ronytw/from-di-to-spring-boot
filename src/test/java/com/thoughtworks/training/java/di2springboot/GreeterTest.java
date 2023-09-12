@@ -48,7 +48,7 @@ class GreeterTest {
         return name -> Optional.empty();
     }
 
-    private GuestBook createGuestBookWithVisitOn(LocalDateTime yesterday) {
-        return name -> Optional.of(yesterday);
+    private GuestBook createGuestBookWithVisitOn(LocalDateTime lastVisitTime) {
+        return name -> Optional.of(lastVisitTime);
     }
 }
