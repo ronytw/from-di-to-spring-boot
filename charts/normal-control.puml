@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+!$WAVE_BLUE = "#003D4F"
+!$SAPPHIRE_BLUE = "#47A1AD"
+!$GRAY = "#EDF1F3"
+!$GREEN = "#6B9E78"
+!$YELLOW = "#CC850A"
+!$PURPLE = "#634F7D"
+!$PINK = "#F2617A"
+
+!$FGCOLOR = $PINK
+!$BGCOLOR = $GREEN
+
+!$FONT_NAME = "Inter"
+
+skinparam DefaultFontName $FONT_NAME
+
+skinparam Sequence {
+    ArrowColor $SAPPHIRE_BLUE
+
+    LifeLineBorderColor $GREEN
+}
+
+skinparam Note {
+  FontColor white
+  BackgroundColor $PINK
+  BorderColor white
+  FontName $FONT_NAME
+}
+
+skinparam Actor {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Participant {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Control {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Database {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Entity {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Queue {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+actor main as "Main"
+
+== building ==
+note over main: understands which concrete class to use for Greeter
+create entity gr as "Greeter"
+main -> gr: calls Greeter's concrete class's constructor
+
+note over gr: understands which concrete class to use for GuestBook
+create entity gb as "GuestBook"
+gr -> gb: calls GuestBook's concrete class's constructor
+gb -> gr: init complete
+gr -> main: init complete
+
+== interacting ==
+main -> gr: consumes Greeter's public methods
+gr -> gb: uses GuestBook's public methods to implement logic
+
+
+@enduml

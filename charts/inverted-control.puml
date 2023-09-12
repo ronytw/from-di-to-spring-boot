@@ -1,0 +1,88 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+!$WAVE_BLUE = "#003D4F"
+!$SAPPHIRE_BLUE = "#47A1AD"
+!$GRAY = "#EDF1F3"
+!$GREEN = "#6B9E78"
+!$YELLOW = "#CC850A"
+!$PURPLE = "#634F7D"
+!$PINK = "#F2617A"
+
+!$FGCOLOR = $PINK
+!$BGCOLOR = $GREEN
+
+!$FONT_NAME = "Inter"
+
+skinparam DefaultFontName $FONT_NAME
+
+skinparam Sequence {
+    ArrowColor $SAPPHIRE_BLUE
+
+    LifeLineBorderColor $GREEN
+}
+
+skinparam Note {
+  FontColor white
+  BackgroundColor $PINK
+  BorderColor white
+  FontName $FONT_NAME
+}
+
+skinparam Actor {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Participant {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Control {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Database {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Entity {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+skinparam Queue {
+    BorderColor $GREEN
+    BackgroundColor $GRAY
+}
+
+actor main as "Main"
+control ioc as "IoC Container"
+== building ==
+
+main -> ioc: start container
+note over ioc: resolves dependencies\nacross all the objects\nit manages
+
+create entity gb as "GuestBook"
+ioc -> gb: initialise objects with no dependencies first
+ioc <- gb: init complete
+
+create entity gr as "Greeter"
+ioc -> gr: initialise objects with dependencies\nsupplying them to their constructor
+ioc <- gr: init complete
+
+== interacting ==
+
+main -> ioc: please give me\na suitable object\nimplementing Greeter
+return
+
+main -> gr: consumes Greeter's public methods
+gr -> gb: uses GuestBook's public\nmethods to implement logic
+
+
+@enduml
