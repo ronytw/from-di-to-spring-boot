@@ -7,10 +7,14 @@ import java.util.Properties;
 
 public class PropertiesGuestBook implements GuestBook {
     private static final String BASE_PATH = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-    private static final String DB_PATH = BASE_PATH + "/visits.properties";
+    private final String databasePath;
+
+    public PropertiesGuestBook(String filename) {
+        databasePath = BASE_PATH + filename;
+    }
 
     public void init() {
-        System.out.println("I'm going to use " + DB_PATH + " for storing data");
+        System.out.println("I'm going to use " + databasePath + " for storing data");
     }
 
     @Override
@@ -31,7 +35,7 @@ public class PropertiesGuestBook implements GuestBook {
     }
 
     private void saveDatabase(Properties visitsDatabase) {
-        try (OutputStream outputStream = new FileOutputStream(DB_PATH)) {
+        try (OutputStream outputStream = new FileOutputStream(databasePath)) {
             visitsDatabase.store(outputStream, null);
         } catch (IOException e) {
             System.err.println("Could not store visits");
@@ -41,7 +45,7 @@ public class PropertiesGuestBook implements GuestBook {
     private Properties loadDatabase() {
         Properties visitsDatabase = new Properties();
         try {
-            try (InputStream inputStream = new FileInputStream(DB_PATH)) {
+            try (InputStream inputStream = new FileInputStream(databasePath)) {
                 visitsDatabase.load(inputStream);
             }
         } catch (IOException e) {
